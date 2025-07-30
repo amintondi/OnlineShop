@@ -1,13 +1,13 @@
 import pandas as pd
-import matplotlib.pyplot as plt
 from persiantools.jdatetime import JalaliDate
 
 def convert_date(miladyDate):
     return JalaliDate(miladyDate)
 
-# df = pd.read_excel('Online Retail.xlsx')
-# df.to_csv('Online Retail.csv',sep=',')
-df=pd.read_csv('Online Retail.csv')
+df = pd.read_excel('Online Retail.xlsx')
+df.to_csv('Online Retail.csv',sep=',')
+# df=pd.read_csv('Online Retail.csv')
+# print(df)
 
 df = df[df['Country'] != 'Israel']
 df.dropna(inplace=True)
@@ -25,16 +25,12 @@ df.drop_duplicates(inplace=True)
 #print(len(df))
 #df.info()
 
-# df["PersianDate"] = df["Date"].apply(convert_date)
-
+df['PersianDate'] = df['InvoiceDate'].apply(convert_date)
+print(df)
 #تعداد مشتریان به تفکیک کشور
 #CustomerIDCount = df.groupby('Country').count()['CustomerID']
 # customerPerCountry= df.groupby('Country')['CustomerID'].nunique()
-# customerPerCountry.plot(kind='bar',
-#     figsize=(14, 6),
-#     title='Customers per Country (Log Scale)',
-#     xlabel='Country',
-#     ylabel='Number of Customers')
+# customerPerCountry.plot(kind='bar', title='Customers per Country (Log Scale)', xlabel='Country', ylabel='Number of Customers')
 # print(customerPerCountry)
 # plt.show()
 
